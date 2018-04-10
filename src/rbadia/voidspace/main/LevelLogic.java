@@ -299,50 +299,49 @@ public class LevelLogic {
 	public void stateTransition(InputHandler ih, LevelState levelState){
 		GameStatus status = getLevelState().getGameStatus();
 		switch (levelState.getCurrentState()) {
-		case LevelState.START_STATE:
-			levelState.setCurrentState(LevelState.INITIAL_SCREEN);
-			break;
-
-		case LevelState.INITIAL_SCREEN:
-			levelState.doInitialScreen();
-			handleKeysDuringInitialScreen(ih, levelState);
-			break;
-
-		case LevelState.GETTING_READY:
-			levelState.doGettingReady();
-			levelState.setCurrentState(LevelState.PLAYING);
-			break;
-
-		case LevelState.PLAYING:
-			levelState.doPlaying();
-			handleKeysDuringPlay(ih, levelState);
-			if(status.getLivesLeft() == 0) {
-				levelState.setCurrentState(LevelState.GAME_OVER_SCREEN);
-			}
-			if(levelState.isLevelWon()) {
-				levelState.setCurrentState(LevelState.LEVEL_WON);
-			}
-			break;
-
-		case LevelState.NEW_MEGAMAN:
-			// TODO Verify that this state is activated when MegaMan dies
-			break;
-
-		case LevelState.GAME_OVER_SCREEN:
-			levelState.doGameOverScreen();
-			levelState.setCurrentState(LevelState.GAME_OVER);
-			break;
-
-		case LevelState.GAME_OVER:
-			levelState.doGameOver();
-			break;
-
-		case LevelState.LEVEL_WON:
-			levelState.doLevelWon();
-			break;
+			case LevelState.START_STATE:
+				levelState.setCurrentState(LevelState.INITIAL_SCREEN);
+				break;
+	
+			case LevelState.INITIAL_SCREEN:
+				levelState.doInitialScreen();
+				handleKeysDuringInitialScreen(ih, levelState);
+				break;
+	
+			case LevelState.GETTING_READY:
+				levelState.doGettingReady();
+				levelState.setCurrentState(LevelState.PLAYING);
+				break;
+	
+			case LevelState.PLAYING:
+				levelState.doPlaying();
+				handleKeysDuringPlay(ih, levelState);
+				if(status.getLivesLeft() == 0) {
+					levelState.setCurrentState(LevelState.GAME_OVER_SCREEN);
+				}
+				if(levelState.isLevelWon()) {
+					levelState.setCurrentState(LevelState.LEVEL_WON);
+				}
+				break;
+	
+			case LevelState.NEW_MEGAMAN:
+				// TODO Verify that this state is activated when MegaMan dies
+				break;
+	
+			case LevelState.GAME_OVER_SCREEN:
+				levelState.doGameOverScreen();
+				levelState.setCurrentState(LevelState.GAME_OVER);
+				break;
+	
+			case LevelState.GAME_OVER:
+				levelState.doGameOver();
+				break;
+	
+			case LevelState.LEVEL_WON:
+				levelState.doLevelWon();
+				break;
 		}
 	}
-
 
 	public void handleKeysDuringInitialScreen(InputHandler ih, LevelState levelState) {
 		if(ih.isSpacePressed()) {
@@ -429,10 +428,12 @@ public class LevelLogic {
 		}
 
 		if(ih.isLeftPressed()){
+			getLevelState().setIsMoveLeft(true);
 			getLevelState().moveMegaManLeft();
 		}
 
 		if(ih.isRightPressed()){
+			getLevelState().setIsMoveLeft(false);
 			getLevelState().moveMegaManRight();
 		}
 	}
