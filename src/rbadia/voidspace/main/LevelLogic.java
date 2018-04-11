@@ -408,6 +408,18 @@ public class LevelLogic {
 
 			}
 		}
+		
+		if (ih.isIPressed()) {
+			//TODO health is increased by 1 point
+		}
+		
+		if (ih.isNPressed()) {
+			//TODO skips to next level
+		}
+		
+		if (ih.isRPressed()) {
+			//TODO reset asteroid count
+		}
 
 		if(ih.isShiftPressed()){
 			getLevelState().speedUpMegaMan();

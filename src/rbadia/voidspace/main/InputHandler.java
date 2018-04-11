@@ -18,6 +18,8 @@ public class InputHandler implements KeyListener{
 	private boolean mIsPressed;
 	private boolean sIsPressed;
 	private boolean iIsPressed;
+	private boolean nIsPressed;
+	private boolean rIsPressed;
 
 	private LevelState levelState;
 	//private GameScreen gScreen;
@@ -45,6 +47,8 @@ public class InputHandler implements KeyListener{
 		mIsPressed = false;
 		sIsPressed = false;
 		iIsPressed = false;
+		nIsPressed = false;
+		rIsPressed = false;
 	}
 
 	public boolean isLeftPressed() {
@@ -90,48 +94,62 @@ public class InputHandler implements KeyListener{
 	public boolean isIPressed() {
 		return iIsPressed;
 	}
+	
+	public boolean isNPressed() {
+		return nIsPressed;
+	}
+	
+	public boolean isRPressed() {
+		return rIsPressed;
+	}
 
 	/**
 	 * Handle a key input event.
 	 */
 	public void keyPressed(KeyEvent e) {
 		switch(e.getKeyCode()){
-		case KeyEvent.VK_UP:
-			this.upIsPressed = true;
-			break;
-		case KeyEvent.VK_DOWN:
-			this.downIsPressed = true;
-			break;
-		case KeyEvent.VK_LEFT:
-			this.leftIsPressed = true;
-			break;
-		case KeyEvent.VK_RIGHT:
-			this.rightIsPressed = true;
-			break;
-		case KeyEvent.VK_SPACE:
-			this.spaceIsPressed = true;
-			break;
-		case KeyEvent.VK_SHIFT:
-			this.shiftIsPressed = true;
-			break;
-		case KeyEvent.VK_ESCAPE:
-			System.exit(1);
-			break;
-		case KeyEvent.VK_E:
-			this.eIsPressed = true;
-			break;
-		case KeyEvent.VK_Q:
-			this.qIsPressed= true;
-			break;
-		case KeyEvent.VK_M:
-			this.mIsPressed= true;
-			break;
-		case KeyEvent.VK_S:
-			this.sIsPressed = true;
-			break;
-		case KeyEvent.VK_I:
-			this.iIsPressed = true;
-			break;
+			case KeyEvent.VK_UP:
+				this.upIsPressed = true;
+				break;
+			case KeyEvent.VK_DOWN:
+				this.downIsPressed = true;
+				break;
+			case KeyEvent.VK_LEFT:
+				this.leftIsPressed = true;
+				break;
+			case KeyEvent.VK_RIGHT:
+				this.rightIsPressed = true;
+				break;
+			case KeyEvent.VK_SPACE:
+				this.spaceIsPressed = true;
+				break;
+			case KeyEvent.VK_SHIFT:
+				this.shiftIsPressed = true;
+				break;
+			case KeyEvent.VK_ESCAPE:
+				System.exit(1);
+				break;
+			case KeyEvent.VK_E:
+				this.eIsPressed = true;
+				break;
+			case KeyEvent.VK_Q:
+				this.qIsPressed= true;
+				break;
+			case KeyEvent.VK_M:
+				this.mIsPressed= true;
+				break;
+			case KeyEvent.VK_S:
+				this.sIsPressed = true;
+				break;
+			case KeyEvent.VK_I:
+				this.iIsPressed = true;
+				break;
+			case KeyEvent.VK_N:
+				this.nIsPressed = true;
+				break;
+			case KeyEvent.VK_R:
+				this.rIsPressed = true;
+				break;
 		}
 		e.consume();
 	}
@@ -174,6 +192,12 @@ public class InputHandler implements KeyListener{
 			break;
 		case KeyEvent.VK_I:
 			this.iIsPressed = false;
+			break;
+		case KeyEvent.VK_N:
+			this.nIsPressed = false;
+			break;
+		case KeyEvent.VK_R:
+			this.rIsPressed = false;
 			break;
 		}
 		e.consume();

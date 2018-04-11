@@ -19,40 +19,40 @@ public class SoundManager {
     /**
      * Plays sound for bullets fired by the ship.
      */
-    public void playBulletSound(){
-    	if(SOUND_ON){
-    		new Thread(new Runnable(){
-    			public void run() {
-    				bulletSound.play();
-    			}
-    		}).start();
-    	}
+    public void playBulletSound() {
+    		if(SOUND_ON) {
+    			new Thread(new Runnable(){
+    				public void run() {
+    					bulletSound.play();
+    				}
+    			}).start();
+    		}
     }
     
     /**
      * Plays sound for ship explosions.
      */
-    public void playShipExplosionSound(){
-    	if(SOUND_ON){
-    		new Thread(new Runnable(){
-    			public void run() {
-    				shipExplosionSound.play();
-    			}
-    		}).start();
-    	}
+    public void playShipExplosionSound() {
+    		if(SOUND_ON) {
+    			new Thread(new Runnable(){
+    				public void run() {
+    					shipExplosionSound.play();
+    				}
+    			}).start();
+    		}
     }
     
     /**
      * Plays sound for asteroid explosions.
      */
     public void playAsteroidExplosionSound(){
-		// play sound for asteroid explosions
-    	if(SOUND_ON){
-    		new Thread(new Runnable(){
-    			public void run() {
-    				shipExplosionSound.play();
-    			}
-    		}).start();	
-    	}
+    	// play sound for asteroid explosions
+    		if(SOUND_ON){
+    			new Thread(new Runnable(){
+    				public void run() {
+    					shipExplosionSound.play();
+    				}
+    			}).start();	
+    		}
     }
 }

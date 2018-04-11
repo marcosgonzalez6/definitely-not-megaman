@@ -51,7 +51,8 @@ public class GraphicsManager {
 			this.bulletImg = ImageIO.read(getClass().getResource("/rbadia/voidspace/graphics/bullet.png"));
 			this.bigBulletImg = ImageIO.read(getClass().getResource("/rbadia/voidspace/graphics/bigBullet.png"));
 
-		} catch (Exception e) {
+		} 
+		catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "The graphic files are either corrupt or missing.",
 					"MegaMan!!! - Fatal Error", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
@@ -66,28 +67,66 @@ public class GraphicsManager {
 	 * @param observer object to be notified
 	 */
 
-	public void drawMegaMan (MegaMan megaMan, Graphics2D g2d, ImageObserver observer){
+	public void drawMegaManR (MegaMan megaMan, Graphics2D g2d, ImageObserver observer){
 		g2d.drawImage(megaManImg, megaMan.x, megaMan.y, observer);	
+	}
+	
+	public void drawMegaManL (MegaMan megaMan, Graphics2D g2d, ImageObserver observer){
+		int width = megaManImg.getWidth();
+		int height = megaManImg.getHeight();
+		BufferedImage megaManLImg = new BufferedImage(width, height, megaManImg.getType());
+		for (int x = 0; x < width; x++) {
+			for (int y = 0; y < height; y++) {
+				megaManLImg.setRGB((width - 1) - x, y, megaManImg.getRGB(x, y));
+			}
+		}
+		g2d.drawImage(megaManLImg, megaMan.x, megaMan.y, observer);	
 	}
 
 	public void drawMegaFallR (MegaMan megaMan, Graphics2D g2d, ImageObserver observer){
 		g2d.drawImage(megaFallRImg, megaMan.x, megaMan.y, observer);	
 	}
 
+	public void drawMegaFallL (MegaMan megaMan, Graphics2D g2d, ImageObserver observer){
+		int width = megaFallRImg.getWidth();
+		int height = megaFallRImg.getHeight();
+		BufferedImage megaFallLImg = new BufferedImage(width, height, megaFallRImg.getType());
+		for (int x = 0; x < width; x++) {
+			for (int y = 0; y < height; y++) {
+				megaFallLImg.setRGB((width - 1) - x, y, megaFallRImg.getRGB(x, y));
+			}
+		}
+		g2d.drawImage(megaFallLImg, megaMan.x, megaMan.y, observer);	
+	}
+	
 	public void drawMegaFireR (MegaMan megaMan, Graphics2D g2d, ImageObserver observer){
 		g2d.drawImage(megaFireRImg, megaMan.x, megaMan.y, observer);	
 	}
+	
+	public void drawMegaFireL (MegaMan megaMan, Graphics2D g2d, ImageObserver observer){
+		int width = megaFireRImg.getWidth();
+		int height = megaFireRImg.getHeight();
+		BufferedImage megaFireLImg = new BufferedImage(width, height, megaFireRImg.getType());
+		for (int x = 0; x < width; x++) {
+			for (int y = 0; y < height; y++) {
+				megaFireLImg.setRGB((width - 1) - x, y, megaFireRImg.getRGB(x, y));
+			}
+		}
+		g2d.drawImage(megaFireLImg, megaMan.x, megaMan.y, observer);	
+	}
 
 	public void drawFloor (Floor floor, Graphics2D g2d, ImageObserver observer, int i){
-			g2d.drawImage(floorImg, floor.x, floor.y, observer);				
-	}
-	public void drawPlatform(Platform platform, Graphics2D g2d, ImageObserver observer, int i){
-			g2d.drawImage(platformImg, platform.x , platform.y, observer);	
+		g2d.drawImage(floorImg, floor.x, floor.y, observer);				
 	}
 	
+	public void drawPlatform (Platform platform, Graphics2D g2d, ImageObserver observer, int i){
+		g2d.drawImage(platformImg, platform.x , platform.y, observer);	
+	}
+	
+	// check if this method is necessary (seems to be exactly like drawPlatform)
 	public void drawPlatform2 (Platform platform, Graphics2D g2d, ImageObserver observer, int i){
 		g2d.drawImage(platformImg, platform.x , platform.y, observer);	
-}
+	}
 
 	/**
 	 * Draws a bullet image to the specified graphics canvas.
@@ -100,7 +139,7 @@ public class GraphicsManager {
 	}
 
 	/**
-	 * Draws a bullet image to the specified graphics canvas.
+	 * Draws a big bullet image to the specified graphics canvas.
 	 * @param bigBullet the bullet to draw
 	 * @param g2d the graphics canvas
 	 * @param observer object to be notified
@@ -119,6 +158,7 @@ public class GraphicsManager {
 		g2d.drawImage(asteroidImg, asteroid.x, asteroid.y, observer);
 	}
 
+	// check if necessary
 	/**
 	 * Draws a MegaMan explosion image to the specified graphics canvas.
 	 * @param megaManExplosion the bounding rectangle of the explosion
@@ -139,6 +179,7 @@ public class GraphicsManager {
 		g2d.drawImage(asteroidExplosionImg, asteroidExplosion.x, asteroidExplosion.y, observer);
 	}
 
+	//check if necessary
 	public void drawBigAsteroidExplosion(Rectangle bigAsteroidExplosion, Graphics2D g2d, ImageObserver observer) {
 		g2d.drawImage(bigAsteroidExplosionImg, bigAsteroidExplosion.x, bigAsteroidExplosion.y, observer);
 	}

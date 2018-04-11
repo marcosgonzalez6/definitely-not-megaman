@@ -19,7 +19,7 @@ public class MegaMan extends GameObject {
 		this.setSpeed(DEFAULT_SPEED);
 	}
 	
-	public int gtInitialYOffset() {
+	public int getInitialYOffset() {
 		return Y_OFFSET;
 	}
 	

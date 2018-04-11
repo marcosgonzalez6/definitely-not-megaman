@@ -31,7 +31,7 @@ public class Level2State extends Level1State {
 	@Override
 	protected void drawAsteroid() {
 		Graphics2D g2d = getGraphics2D();
-		if((asteroid.getX() + asteroid.getPixelsWide() >  0)) {
+		if((asteroid.getX() + asteroid.getPixelsWide() > 0)) {
 			asteroid.translate(-asteroid.getSpeed(), asteroid.getSpeed()/2);
 			getGraphicsManager().drawAsteroid(asteroid, g2d, this);	
 		}

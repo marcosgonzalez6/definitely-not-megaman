@@ -162,6 +162,7 @@ public class MainFrame extends JFrame {
 			gridBagConstraints.gridy = 0;
 			gridBagConstraints.fill = GridBagConstraints.NONE;
 			gridBagConstraints.gridwidth = 6;	
+			
 			livesLabel = new JLabel("Lives Left: ");
 			livesLabel.setFont(new Font("SansSerif", Font.PLAIN, fontSize));
 			livesValueLabel = new JLabel("3");
@@ -174,6 +175,7 @@ public class MainFrame extends JFrame {
 			levelLabel.setFont(new Font("SansSerif", Font.PLAIN, fontSize));
 			levelValueLabel = new JLabel("1");
 			levelValueLabel.setFont(new Font("SansSerif", Font.PLAIN, fontSize));
+			
 			jContentPane = new JPanel();
 			jContentPane.setLayout(new GridBagLayout());
 			jContentPane.add(getLevelState(), gridBagConstraints);
