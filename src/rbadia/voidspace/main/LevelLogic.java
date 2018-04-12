@@ -410,15 +410,18 @@ public class LevelLogic {
 		}
 		
 		if (ih.isIPressed()) {
-			//TODO health is increased by 1 point
+			status.setLivesLeft(status.getLivesLeft() + 1);
 		}
 		
+		// check if necessary
 		if (ih.isNPressed()) {
-			//TODO skips to next level
 		}
 		
 		if (ih.isRPressed()) {
 			//TODO reset asteroid count
+			status.setAsteroidsDestroyed(0);
+			Level1State level = (Level1State) getLevelState();
+			level.setLevelAsteroidsDestroyed(0);
 		}
 
 		if(ih.isShiftPressed()){

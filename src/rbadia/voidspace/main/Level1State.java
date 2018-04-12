@@ -87,6 +87,9 @@ public class Level1State extends LevelState {
 	public Asteroid getAsteroid() 				{ return asteroid; 		}
 	public List<Bullet> getBullets() 			{ return bullets; 		}
 	public List<BigBullet> getBigBullets()		{ return bigBullets;   	}
+	public int getLevelAsteroidsDestroyed()		{ return levelAsteroidsDestroyed;}
+	
+	public void setLevelAsteroidsDestroyed(int num) 	{ this.levelAsteroidsDestroyed = num; } 
 
 	// Level state methods
 	// The method associated with the current level state will be called 
