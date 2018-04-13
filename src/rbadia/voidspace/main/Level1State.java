@@ -24,6 +24,7 @@ import rbadia.voidspace.model.Bullet;
 import rbadia.voidspace.model.Floor;
 import rbadia.voidspace.model.MegaMan;
 import rbadia.voidspace.model.Platform;
+import rbadia.voidspace.model.PowerUp;
 import rbadia.voidspace.sounds.SoundManager;
 
 /**
@@ -41,6 +42,8 @@ public class Level1State extends LevelState {
 	protected Floor[] floor;	
 	protected int numPlatforms = 8;
 	protected Platform[] platforms;
+	protected PowerUp powerUp;
+	protected int numPowerUps = 0;
 
 	protected int damage = 0;
 	protected static final int NEW_MEGAMAN_DELAY = 500;
@@ -88,7 +91,7 @@ public class Level1State extends LevelState {
 	public List<Bullet> getBullets() 			{ return bullets; 		}
 	public List<BigBullet> getBigBullets()		{ return bigBullets;   	}
 	public int getLevelAsteroidsDestroyed()		{ return levelAsteroidsDestroyed;}
-	
+	public PowerUp getPowerUp()                  { return powerUp;}
 	public void setLevelAsteroidsDestroyed(int num) 	{ this.levelAsteroidsDestroyed = num; } 
 
 	// Level state methods
@@ -229,11 +232,13 @@ public class Level1State extends LevelState {
 		drawAsteroid();
 		drawBullets();
 		drawBigBullets();
+		//drawPowerUp();
 		checkBullletAsteroidCollisions();
 		checkBigBulletAsteroidCollisions();
 		checkMegaManAsteroidCollisions();
 		checkAsteroidFloorCollisions();
-
+		//checkPowerUpMegaManCollisions();
+		
 		// update asteroids destroyed (score) label  
 		getMainFrame().getDestroyedValueLabel().setText(Long.toString(status.getAsteroidsDestroyed()));
 		// update lives left label
@@ -257,6 +262,20 @@ public class Level1State extends LevelState {
 			removeAsteroid(asteroid);
 		}
 	}
+	
+//	protected void checkPowerUpMegaManCollisions() {
+//		GameStatus status = getGameStatus();
+//		if(powerUp.intersects(megaMan)){
+//			status.setLivesLeft(status.getLivesLeft() + 5);
+//			removePowerUp(powerUp);
+//		}
+//	}
+	
+	
+	public void removePowerUp(PowerUp powerUp) {
+		powerUp.setLocation(0, 10);
+	}
+	
 
 	protected void checkBigBulletAsteroidCollisions() {
 		GameStatus status = getGameStatus();
@@ -302,6 +321,19 @@ public class Level1State extends LevelState {
 		}
 	}
 
+	protected void drawPowerUp() {
+		Graphics2D g2d = getGraphics2D();
+	    getGraphicsManager().drawPowerUp(powerUp, g2d, this);
+	    
+			
+	}
+	
+	
+	public PowerUp newPowerUp(Level1State screen) {
+		powerUp = new PowerUp(100, SCREEN_HEIGHT - Floor.HEIGHT/2 - PowerUp.HEIGHT);
+		return powerUp;
+	}
+	
 	protected void drawBullets() {
 		Graphics2D g2d = getGraphics2D();
 		for(int i=0; i<bullets.size(); i++){
