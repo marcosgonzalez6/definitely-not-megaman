@@ -2,15 +2,16 @@ package rbadia.voidspace.main;
 
 
 
+import java.awt.Graphics2D;
+
 import rbadia.voidspace.graphics.GraphicsManager;
 import rbadia.voidspace.sounds.SoundManager;
 
 public class Level4State extends Level2State{   //Change the extension to Level3State
-	boolean moreThanOnce = true;
-	boolean once = true;
-	/**
-	 * 
-	 */
+	private boolean moreThanOnce = true;
+	private boolean once = true;
+	private int counter = 0;
+
 	private static final long serialVersionUID = 1L;
 
 	public Level4State(int level, MainFrame frame, GameStatus status, LevelLogic gameLogic, InputHandler inputHandler,
@@ -42,7 +43,7 @@ public class Level4State extends Level2State{   //Change the extension to Level3
 		newPowerUp(this);
 		
 		if(moreThanOnce) {
-		drawPowerUp();
+			drawPowerUp();
 		}
 		if (checkPowerUpMegaManCollisions()) {
 			powerUp.setLocation(-10, 0);
@@ -55,18 +56,45 @@ public class Level4State extends Level2State{   //Change the extension to Level3
 		GameStatus status = getGameStatus();
 		if(powerUp.intersects(megaMan)){
 			if (once) {
-			status.setLivesLeft(status.getLivesLeft() + 5);
-			once = false;
+				status.setLivesLeft(status.getLivesLeft() + 5);
+				once = false;
 			}
 			//powerUp.setLocation(0, 10);
 			super.removePowerUp(powerUp);
 			moreThanOnce = false;
 			return true;
 		}	
-			else {
-				return false;
+		else {
+			return false;
+		}
+	}
+	
+	@Override
+	protected void drawAsteroid() {
+		Graphics2D g2d = getGraphics2D();
+		if((asteroid.getX() + asteroid.getPixelsWide() > 0)) {
+			if (counter < 20) { 
+				asteroid.translate(-asteroid.getSpeed(), asteroid.getSpeed()/2);
 			}
-		
+			else if (counter >= 20) {
+				asteroid.translate(-asteroid.getSpeed(), -asteroid.getSpeed()/2);
+			}
+			counter++;
+				if (counter == 40) 				{counter = 0;	}
+			getGraphicsManager().drawAsteroid(asteroid, g2d, this);	
+		}
+		else {
+			long currentTime = System.currentTimeMillis();
+			if((currentTime - lastAsteroidTime) > NEW_ASTEROID_DELAY){
+
+				asteroid.setLocation(SCREEN_WIDTH - asteroid.getPixelsWide(),
+						rand.nextInt(SCREEN_HEIGHT - asteroid.getPixelsTall() - 32));
+			}
+			else {
+				// draw explosion
+				getGraphicsManager().drawAsteroidExplosion(asteroidExplosion, g2d, this);
+			}
+		}	
 	}
 	
 }
