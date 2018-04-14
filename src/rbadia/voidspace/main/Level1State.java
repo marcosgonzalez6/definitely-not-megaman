@@ -273,7 +273,7 @@ public class Level1State extends LevelState {
 	
 	
 	public void removePowerUp(PowerUp powerUp) {
-		powerUp.setLocation(0, 10);
+		powerUp.setLocation(-10, 0);
 	}
 	
 

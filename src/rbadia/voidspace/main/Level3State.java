@@ -1,4 +1,5 @@
 package rbadia.voidspace.main;
+
 import java.awt.Graphics2D;
 import java.util.Random;
 

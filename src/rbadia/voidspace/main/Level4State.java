@@ -1,12 +1,13 @@
 package rbadia.voidspace.main;
 
-import java.awt.Graphics2D;
+
 
 import rbadia.voidspace.graphics.GraphicsManager;
 import rbadia.voidspace.sounds.SoundManager;
 
 public class Level4State extends Level2State{   //Change the extension to Level3State
-
+	boolean moreThanOnce = true;
+	boolean once = true;
 	/**
 	 * 
 	 */
@@ -39,19 +40,27 @@ public class Level4State extends Level2State{   //Change the extension to Level3
 	public void updateScreen() {
 		super.updateScreen();
 		newPowerUp(this);
-		if (checkPowerUpMegaManCollisions()) {
-			powerUp.setLocation(0, 10);
-		}
+		
+		if(moreThanOnce) {
 		drawPowerUp();
+		}
+		if (checkPowerUpMegaManCollisions()) {
+			powerUp.setLocation(-10, 0);
+		}
+		
 		checkPowerUpMegaManCollisions();
 	}
 	
 	protected boolean checkPowerUpMegaManCollisions() {
 		GameStatus status = getGameStatus();
 		if(powerUp.intersects(megaMan)){
+			if (once) {
 			status.setLivesLeft(status.getLivesLeft() + 5);
+			once = false;
+			}
 			//powerUp.setLocation(0, 10);
-			//super.removePowerUp(powerUp);
+			super.removePowerUp(powerUp);
+			moreThanOnce = false;
 			return true;
 		}	
 			else {

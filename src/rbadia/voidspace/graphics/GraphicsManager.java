@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import rbadia.voidspace.model.Asteroid;
 //import rbadia.voidspace.model.BigAsteroid;
 import rbadia.voidspace.model.BigBullet;
+import rbadia.voidspace.model.Boss;
 //import rbadia.voidspace.model.Boss;
 import rbadia.voidspace.model.Bullet;
 import rbadia.voidspace.model.Floor;
@@ -35,6 +36,7 @@ public class GraphicsManager {
 	private BufferedImage megaManExplosionImg;
 	private BufferedImage bigAsteroidExplosionImg;
 	private BufferedImage powerUpImg;
+	private BufferedImage bossImg;
 
 	/**
 	 * Creates a new graphics manager and loads the game images.
@@ -51,7 +53,8 @@ public class GraphicsManager {
 			this.asteroidExplosionImg = ImageIO.read(getClass().getResource("/rbadia/voidspace/graphics/asteroidExplosion.png"));
 			this.bulletImg = ImageIO.read(getClass().getResource("/rbadia/voidspace/graphics/bullet.png"));
 			this.bigBulletImg = ImageIO.read(getClass().getResource("/rbadia/voidspace/graphics/bigBullet.png"));
-			this.powerUpImg = ImageIO.read(getClass().getResource("/rbadia/voidspace/graphics/bigBullet.png"));
+			this.powerUpImg = ImageIO.read(getClass().getResource("/rbadia/voidspace/graphics/PowerUp.png"));
+			this.bossImg = ImageIO.read(getClass().getResource("/rbadia/voidspace/graphics/ship.png"));
 		} 
 		catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "The graphic files are either corrupt or missing.",
@@ -187,6 +190,10 @@ public class GraphicsManager {
 
 	public void drawPowerUp(Rectangle powerUp, Graphics2D g2d, ImageObserver observer) {
 		g2d.drawImage(powerUpImg, powerUp.x, powerUp.y, observer);
+	}
+	
+	public void drawBoss(Boss boss, Graphics2D g2d, ImageObserver observer) {
+		g2d.drawImage(bossImg, boss.x, boss.y, observer);
 	}
 
 }
