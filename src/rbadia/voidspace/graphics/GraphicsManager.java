@@ -1,5 +1,6 @@
 package rbadia.voidspace.graphics;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -194,6 +195,11 @@ public class GraphicsManager {
 	
 	public void drawBoss(Boss boss, Graphics2D g2d, ImageObserver observer) {
 		g2d.drawImage(bossImg, boss.x, boss.y, observer);
+	}
+	
+	public void drawBossLivesDisplay(String bossLivesString, Graphics2D g2d) {
+		g2d.setColor(Color.WHITE);
+		g2d.drawString(bossLivesString, 350, 20);
 	}
 
 }

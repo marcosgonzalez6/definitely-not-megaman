@@ -1,15 +1,15 @@
 package rbadia.voidspace.main;
 
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 import java.util.List;
 
+import com.sun.javafx.geom.Rectangle;
 
 import rbadia.voidspace.graphics.GraphicsManager;
 import rbadia.voidspace.model.Boss;
 import rbadia.voidspace.model.Bullet;
-import rbadia.voidspace.model.Floor;
 import rbadia.voidspace.model.MegaMan;
-import rbadia.voidspace.model.Platform;
 import rbadia.voidspace.sounds.SoundManager;
 
 public class Level5State extends Level4State{
@@ -17,9 +17,11 @@ public class Level5State extends Level4State{
 	private static final long serialVersionUID = -2094575762243216079L;
 
 	private Boss boss;
+	private int bossLives = 5;
 	protected List<Bullet> bossBullets;
-	
 	private boolean isBossMoveUp = true;
+	private long lastBossBulletTime;
+	private static final int NEW_BOSSBULLET_DELAY = 150;
 	
 	public Level5State(int level, MainFrame frame, GameStatus status, LevelLogic gameLogic, InputHandler inputHandler,
 			GraphicsManager graphicsMan, SoundManager soundMan) {
@@ -32,17 +34,23 @@ public class Level5State extends Level4State{
 	
 	@Override
 	public void doStart() {	
+		bossBullets = new ArrayList<Bullet>();
+		lastBossBulletTime = -NEW_BOSSBULLET_DELAY;
 		super.doStart();
 		setStartState(GETTING_READY);
 		setCurrentState(getStartState());
 		newBoss();
-//		drawBossBullets();
 	}
 	
 	@Override
 	public void updateScreen() {
 		super.updateScreen();
+		drawBossLives();
 		drawBoss();
+		bossShoot();
+		drawBossBullets();
+		checkBossBullletMegaManCollisions();
+		checkBulletBossCollisions();
 	}
 	
 	public void drawBoss() {
@@ -75,81 +83,104 @@ public class Level5State extends Level4State{
 		}
 	}
 	
-	public boolean bossFall(){
-		MegaMan boss = this.getBoss(); 
-		Platform[] platforms = this.getPlatforms();
-		for(int i=0; i<getNumPlatforms(); i++){
-			if((((platforms[i].getX() < boss.getX()) && (boss.getX()< platforms[i].getX() + platforms[i].getWidth()))
-					|| ((platforms[i].getX() < boss.getX() + boss.getWidth()) 
-							&& (boss.getX() + boss.getWidth()< platforms[i].getX() + platforms[i].getWidth())))
-					&& boss.getY() + boss.getHeight() == platforms[i].getY()
-					){
-				return false;
-			}
+	public boolean bossShoot() {
+		if ((this.boss.getY() > this.megaMan.getY() - this.megaMan.getHeight()/2) && (this.boss.getY() < this.megaMan.getMinY() + this.megaMan.getHeight()/2)) {
+			fireBossBullet();
+			return true;
 		}
-		return true;
+		else 
+			return false;
 	}
 	
-	
-	
-	protected void bossGravity(){
+	public boolean bossFire(){
 		MegaMan boss = this.getBoss();
-		Floor[] floor = this.getFloor();
+		List<Bullet> bullets = this.getBossBullets();
+		for(int i=0; i<bullets.size(); i++){
+			Bullet bullet = bullets.get(i);
+			if(((bullet.getX() > boss.getX() + boss.getWidth()) && 
+					(bullet.getX() <= boss.getX() + boss.getWidth() + 60)) || 
+						((bullet.getX() < boss.getX()) && (bullet.getX() >= boss.getX() - 60))){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public void fireBossBullet(){
+		long currentTime = System.currentTimeMillis();
+		if (currentTime - lastBossBulletTime > NEW_BOSSBULLET_DELAY) {
+			Bullet bullet = new Bullet(boss.x - Bullet.WIDTH/2,
+					boss.y + boss.width/2 - Bullet.HEIGHT +2);
+			bossBullets.add(bullet);
+			lastBossBulletTime = currentTime;
+			this.getSoundManager().playBulletSound();
+		}
+	}
+	
+	public boolean moveBossBullet(Bullet bullet){
+//		if(bullet.getY() - bullet.getSpeed() >= 0){
+		if(((bullet.getX() - bullet.getSpeed() >= 0) && (bullet.getX() + bullet.getSpeed() <= 500)) || (bossBullets.size() < 7)) {
+		// TODO check if 500 can be substituted for variable (SCREEN_WIDTH)
+			bullet.translate(-bullet.getSpeed(), 0);
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+	
+	public void drawBossBullets() {
+		Graphics2D g2d = getGraphics2D();
+		for(int i=0; i<this.bossBullets.size(); i++){
+			Bullet bullet = bossBullets.get(i);
+			getGraphicsManager().drawBullet(bullet, g2d, this);
 
-		for(int i=0; i<9; i++){
-			if((boss.getY() + boss.getHeight() -17 < SCREEN_HEIGHT - floor[i].getHeight()/2) 
-					&& bossFall() == true){
-
-				boss.translate(0 , 2);
+			boolean remove = this.moveBossBullet(bullet);
+			if(remove){
+				bossBullets.remove(i);
+				i--;
 			}
 		}
 	}
 	
-
+	public void checkBossBullletMegaManCollisions() {
+		GameStatus status = getGameStatus();
+		for(int i=0; i<bossBullets.size(); i++){
+			Bullet bullet = bossBullets.get(i);
+			if(megaMan.intersects(bullet)){
+				status.setLivesLeft(status.getLivesLeft() - 1);
+				bossBullets.remove(i);
+				break;
+			}
+		}
+	}
 	
-//	public boolean bossShoot() {
-//		if ((this.boss.getY() > this.megaMan.getY() - this.megaMan.getHeight()) && (this.boss.getY() < this.megaMan.getY() + 2*this.megaMan.getHeight())) {
-//			fireBossBullet();
-//			return true;
-//		}
-//		else 
-//			return false;
-//	}
-//	
-//	public void fireBossBullet() {
-//		megaMan = getBoss();
-//		Bullet bullet = new Bullet(megaMan.x + Bullet.WIDTH/2,
-//				megaMan.y + megaMan.width/2 - Bullet.HEIGHT +2);	
-//		bossBullets.add(bullet);	
-//	}
+	public void checkBulletBossCollisions() {
+//		GameStatus status = getGameStatus();
+		for(int i=0; i<bullets.size(); i++){
+			Bullet bullet = bullets.get(i);
+			if(boss.intersects(bullet)){
+				bossLives--;
+				bullets.remove(i);
+				break;
+			}
+		}
+	}
 	
-//	public void fireBullet(){
-//		if (!super.getIsMoveLeft()) {
-//			Bullet bullet = new Bullet(megaMan.x + megaMan.width - Bullet.WIDTH/2,
-//					megaMan.y + megaMan.width/2 - Bullet.HEIGHT +2);
-//			bullets.add(bullet);
-//		}
-//		// TODO add if super.getIsMoveLeft to make new bullet Bullet(megaMan.x without width, ...)?
-//		else {
-//			Bullet bullet = new Bullet(megaMan.x + Bullet.WIDTH/2,
-//					megaMan.y + megaMan.width/2 - Bullet.HEIGHT +2);	
-//			bullets.add(bullet);
-//		}
-//		this.getSoundManager().playBulletSound();
-//	}
+	public void drawBossLives() {
+		Graphics2D g2d = getGraphics2D();
+		String bossLivesString = "Boss Lives Left: " + bossLives;
+		getGraphicsManager().drawBossLivesDisplay(bossLivesString, g2d);
+	}
 	
-//	protected void drawBossBullets() {
-//		Graphics2D g2d = getGraphics2D();
-//		for(int i=0; i<this.bossBullets.size(); i++){
-//			Bullet bullet = bossBullets.get(i);
-//			getGraphicsManager().drawBullet(bullet, g2d, this);
-//
-//			boolean remove = this.moveBullet(bullet);
-//			if(remove){
-//				bossBullets.remove(i);
-//				i--;
-//			}
-//		}
-//	}
+	@Override
+	public boolean isLevelWon() {
+		return (levelAsteroidsDestroyed >= 3 || bossLives == 0);
+	}
+	
+	@Override
+	protected void drawAsteroid() {
+		// empty so that there are no asteroids on this level
+	}
 	
 }
