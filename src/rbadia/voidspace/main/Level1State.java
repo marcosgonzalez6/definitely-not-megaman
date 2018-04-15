@@ -262,18 +262,9 @@ public class Level1State extends LevelState {
 			removeAsteroid(asteroid);
 		}
 	}
-	
-//	protected void checkPowerUpMegaManCollisions() {
-//		GameStatus status = getGameStatus();
-//		if(powerUp.intersects(megaMan)){
-//			status.setLivesLeft(status.getLivesLeft() + 5);
-//			removePowerUp(powerUp);
-//		}
-//	}
-	
-	
+		
 	public void removePowerUp(PowerUp powerUp) {
-		powerUp.setLocation(-10, 0);
+		powerUp.setLocation(-powerUp.getPixelsWide(), -powerUp.getPixelsTall());
 	}
 	
 
@@ -377,10 +368,10 @@ public class Level1State extends LevelState {
 		Graphics2D g2d = getGraphics2D();
 		GameStatus status = getGameStatus();
 		if(!status.isNewMegaMan()){
-			if((Gravity() == true) || ((Gravity() == true) && (Fire() == true || Fire2() == true)) && !super.getIsMoveLeft()){
+			if((Gravity() == true && !super.getIsMoveLeft()) || ((Gravity() == true) && (Fire() == true || Fire2() == true)) && !super.getIsMoveLeft()){
 				getGraphicsManager().drawMegaFallR(megaMan, g2d, this);
 			}
-			if((Gravity() == true) || ((Gravity() == true) && (Fire() == true || Fire2() == true)) && super.getIsMoveLeft()){
+			if((Gravity() == true && super.getIsMoveLeft()) || ((Gravity() == true) && (Fire() == true || Fire2() == true)) && super.getIsMoveLeft()){
 				getGraphicsManager().drawMegaFallL(megaMan, g2d, this);
 			}
 		}

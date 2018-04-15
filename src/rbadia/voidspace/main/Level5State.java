@@ -4,8 +4,6 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sun.javafx.geom.Rectangle;
-
 import rbadia.voidspace.graphics.GraphicsManager;
 import rbadia.voidspace.model.Boss;
 import rbadia.voidspace.model.Bullet;
@@ -60,16 +58,15 @@ public class Level5State extends Level4State{
 		moveBoss(this.getBoss());
 	}
 	
-	public Boss newBoss(){
-		this.boss = new Boss((SCREEN_WIDTH - Boss.WIDTH) / 2 + 200, (SCREEN_HEIGHT - Boss.HEIGHT - Boss.Y_OFFSET) / 2);
+	public Boss newBoss() {
+		this.boss = new Boss(SCREEN_WIDTH - Boss.WIDTH + 70, (SCREEN_HEIGHT - Boss.HEIGHT - Boss.Y_OFFSET) / 2);
 		return boss;
 	}
 	
 	public void moveBoss(Boss boss) {
-//		double xPos = platform.getX();
 		int yPos = (int) boss.getY();
 		
-		if (yPos <= 100)	{
+		if (yPos <= 50)	{
 			isBossMoveUp = false;
 		}
 		if (yPos >= 360) {

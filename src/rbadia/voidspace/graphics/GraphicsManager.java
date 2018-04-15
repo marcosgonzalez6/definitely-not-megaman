@@ -1,6 +1,7 @@
 package rbadia.voidspace.graphics;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -199,7 +200,8 @@ public class GraphicsManager {
 	
 	public void drawBossLivesDisplay(String bossLivesString, Graphics2D g2d) {
 		g2d.setColor(Color.WHITE);
-		g2d.drawString(bossLivesString, 350, 20);
+		g2d.setFont(new Font("SanSerif", Font.PLAIN, 12));
+		g2d.drawString(bossLivesString, 380, 30);
 	}
 
 }
