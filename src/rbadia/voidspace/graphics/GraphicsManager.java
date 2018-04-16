@@ -195,6 +195,15 @@ public class GraphicsManager {
 	}
 	
 	public void drawBoss(Boss boss, Graphics2D g2d, ImageObserver observer) {
+//		int width = bossImg.getWidth();
+//		int height = bossImg.getHeight();
+//		BufferedImage bossFireLImg = new BufferedImage(width, height, bossImg.getType());
+//		for (int x = 0; x < width; x++) {
+//			for (int y = 0; y < height; y++) {
+//				bossFireLImg.setRGB(x, (height - 1) + y, bossImg.getRGB(x, y));
+//			}
+//		}
+//		g2d.rotate(Math.PI/2);
 		g2d.drawImage(bossImg, boss.x, boss.y, observer);
 	}
 	

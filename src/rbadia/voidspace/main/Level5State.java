@@ -47,8 +47,9 @@ public class Level5State extends Level4State{
 		drawBoss();
 		bossShoot();
 		drawBossBullets();
-		checkBossBullletMegaManCollisions();
+		checkBossBulletMegaManCollisions();
 		checkBulletBossCollisions();
+		checkMegaManBossCollisions();
 	}
 	
 	public void drawBoss() {
@@ -140,7 +141,7 @@ public class Level5State extends Level4State{
 		}
 	}
 	
-	public void checkBossBullletMegaManCollisions() {
+	public void checkBossBulletMegaManCollisions() {
 		GameStatus status = getGameStatus();
 		for(int i=0; i<bossBullets.size(); i++){
 			Bullet bullet = bossBullets.get(i);
@@ -149,6 +150,14 @@ public class Level5State extends Level4State{
 				bossBullets.remove(i);
 				break;
 			}
+		}
+	}
+	
+	public void checkMegaManBossCollisions() {
+		GameStatus status = getGameStatus();
+		if(boss.intersects(megaMan)){
+			status.setLivesLeft(status.getLivesLeft() - 1);
+//			removeAsteroid(asteroid);
 		}
 	}
 	

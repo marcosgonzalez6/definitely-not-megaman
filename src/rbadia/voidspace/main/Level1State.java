@@ -314,11 +314,8 @@ public class Level1State extends LevelState {
 
 	protected void drawPowerUp() {
 		Graphics2D g2d = getGraphics2D();
-	    getGraphicsManager().drawPowerUp(powerUp, g2d, this);
-	    
-			
+	    getGraphicsManager().drawPowerUp(powerUp, g2d, this);		
 	}
-	
 	
 	public PowerUp newPowerUp(Level1State screen) {
 		powerUp = new PowerUp(100, SCREEN_HEIGHT - Floor.HEIGHT/2 - PowerUp.HEIGHT);
