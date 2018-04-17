@@ -410,6 +410,7 @@ public class Level1State extends LevelState {
 		Graphics2D g2d = getGraphics2D();
 		g2d.setPaint(Color.BLACK);
 		g2d.fillRect(0, 0, getSize().width, getSize().height);
+		getGraphicsManager().drawBackground1(g2d, this);
 	}
 
 	/**

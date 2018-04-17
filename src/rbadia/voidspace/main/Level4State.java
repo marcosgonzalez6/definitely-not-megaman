@@ -2,6 +2,7 @@ package rbadia.voidspace.main;
 
 
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 
 import rbadia.voidspace.graphics.GraphicsManager;
@@ -21,6 +22,14 @@ public class Level4State extends Level2State{   //Change the extension to Level3
 		super(level, frame, status, gameLogic, inputHandler, graphicsMan, soundMan);
 		
 	}      
+	
+	protected void clearScreen() {
+		// clear screen
+		Graphics2D g2d = getGraphics2D();
+		g2d.setPaint(Color.BLACK);
+		g2d.fillRect(0, 0, getSize().width, getSize().height);
+		getGraphicsManager().drawBackground4(g2d, this);
+	}
 	
 	@Override
 	public void doStart() {	

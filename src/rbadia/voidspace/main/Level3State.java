@@ -1,5 +1,6 @@
 package rbadia.voidspace.main;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.util.Random;
@@ -31,6 +32,13 @@ public class Level3State extends Level1State {
 		super(level, frame, status, gameLogic, inputHandler, graphicsMan, soundMan);
 	}
 	
+	protected void clearScreen() {
+		// clear screen
+		Graphics2D g2d = getGraphics2D();
+		g2d.setPaint(Color.BLACK);
+		g2d.fillRect(0, 0, getSize().width, getSize().height);
+		getGraphicsManager().drawBackground3(g2d, this);
+	}
 	
 	@Override
 	public void doStart() {

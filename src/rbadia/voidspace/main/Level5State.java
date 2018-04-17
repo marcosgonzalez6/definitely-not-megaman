@@ -1,5 +1,6 @@
 package rbadia.voidspace.main;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
@@ -131,7 +132,7 @@ public class Level5State extends Level4State{
 		Graphics2D g2d = getGraphics2D();
 		for(int i=0; i<this.bossBullets.size(); i++){
 			Bullet bullet = bossBullets.get(i);
-			getGraphicsManager().drawBullet(bullet, g2d, this);
+			getGraphicsManager().drawBossBullet(bullet, g2d, this);
 
 			boolean remove = this.moveBossBullet(bullet);
 			if(remove){
@@ -177,6 +178,14 @@ public class Level5State extends Level4State{
 		Graphics2D g2d = getGraphics2D();
 		String bossLivesString = "Boss Lives Left: " + bossLives;
 		getGraphicsManager().drawBossLivesDisplay(bossLivesString, g2d);
+	}
+	
+	protected void clearScreen() {
+		// clear screen
+		Graphics2D g2d = getGraphics2D();
+		g2d.setPaint(Color.BLACK);
+		g2d.fillRect(0, 0, getSize().width, getSize().height);
+		getGraphicsManager().drawBackground5(g2d, this);
 	}
 	
 	@Override

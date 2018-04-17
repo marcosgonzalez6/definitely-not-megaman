@@ -39,6 +39,13 @@ public class GraphicsManager {
 	private BufferedImage bigAsteroidExplosionImg;
 	private BufferedImage powerUpImg;
 	private BufferedImage bossImg;
+	private BufferedImage level1Img;
+	private BufferedImage level2Img;
+	private BufferedImage level3Img;
+	private BufferedImage level4Img;
+	private BufferedImage level5Img;
+	private BufferedImage blueBulletImg;
+
 
 	/**
 	 * Creates a new graphics manager and loads the game images.
@@ -57,6 +64,12 @@ public class GraphicsManager {
 			this.bigBulletImg = ImageIO.read(getClass().getResource("/rbadia/voidspace/graphics/bigBullet.png"));
 			this.powerUpImg = ImageIO.read(getClass().getResource("/rbadia/voidspace/graphics/PowerUp.png"));
 			this.bossImg = ImageIO.read(getClass().getResource("/rbadia/voidspace/graphics/ship.png"));
+			this.level1Img = ImageIO.read(getClass().getResource("/rbadia/voidspace/graphics/level1.jpg"));
+			this.level2Img = ImageIO.read(getClass().getResource("/rbadia/voidspace/graphics/level2.jpg"));
+			this.level3Img = ImageIO.read(getClass().getResource("/rbadia/voidspace/graphics/level3.jpeg"));
+			this.level4Img = ImageIO.read(getClass().getResource("/rbadia/voidspace/graphics/level4.jpg"));
+			this.level5Img = ImageIO.read(getClass().getResource("/rbadia/voidspace/graphics/level5.jpg"));
+			this.blueBulletImg = ImageIO.read(getClass().getResource("/rbadia/voidspace/graphics/blueBullet.png"));
 		} 
 		catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "The graphic files are either corrupt or missing.",
@@ -119,6 +132,26 @@ public class GraphicsManager {
 			}
 		}
 		g2d.drawImage(megaFireLImg, megaMan.x, megaMan.y, observer);	
+	}
+
+	public void drawBackground1 (Graphics2D g2d, ImageObserver observer) {
+		g2d.drawImage(level1Img, 0, 0, observer);
+	}
+	
+	public void drawBackground2 (Graphics2D g2d, ImageObserver observer) {
+		g2d.drawImage(level2Img, 0, 0, observer);
+	}
+	
+	public void drawBackground3 (Graphics2D g2d, ImageObserver observer) {
+		g2d.drawImage(level3Img, 0, 0, observer);
+	}
+	
+	public void drawBackground4 (Graphics2D g2d, ImageObserver observer) {
+		g2d.drawImage(level4Img, 0, 0, observer);
+	}
+	
+	public void drawBackground5 (Graphics2D g2d, ImageObserver observer) {
+		g2d.drawImage(level5Img, 0, 0, observer);
 	}
 
 	public void drawFloor (Floor floor, Graphics2D g2d, ImageObserver observer, int i){
@@ -213,4 +246,7 @@ public class GraphicsManager {
 		g2d.drawString(bossLivesString, 380, 30);
 	}
 
+	public void drawBossBullet(Rectangle bullet, Graphics2D g2d, ImageObserver observer) {
+		g2d.drawImage(blueBulletImg, bullet.x, bullet.y, observer);
+	}
 }
