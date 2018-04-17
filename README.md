@@ -1,23 +1,24 @@
 # Project 1 - Definitely Not Megaman
 	Small project description	
 
-	Estimated Time spent: Spent total in hours
+	Estimated Time spent:  48 
 
 
 
-## Team Name: 
+## Team Name: realg4java
 
 ## Team Members: 
 
-	1. <Full Name> (<GitHubUsername>) - <UPRMEmail>
-	2. <Full Name> (<GitHubUsername>) - <UPRMEmail>
+	1. <Marcos J Gonzalez> (<marcosgonzalez6>) - <marcos.gonzalez6@upr.edu>
+	2. <Arnaldo Villarrubia> (<Naldo1028>) - <arnaldo.villarrubia@upr.edu>
 
-## The following **required** functionality is implemented:
+## The following **required** functionality is implemented:  
 
 - [x] This is a functionality is implemented.
+	new level with moving platforms, new level with powerup, new level with shooting boss, looks and shoots in both directions, 2 	asteroids on screen, asteroid with random constant speed, 
 
 - [ ] This is a functionality is not implemented.
-
+	
 
 
 ## The following **optional** features are implemented:
@@ -25,15 +26,16 @@
 
 
 - [x] An implemented feauture.
+	new backgrounds, asteroid angle varies in level 2, boss health indicator
 
 - [ ] A planned unimplemented feature.
 
 ## Notes
 
 
-	What was your project's biggest challenge?
+	What was your project's biggest challenge?   reading through all of the original code and understanding how each class and method worked
 	
-    What was your favorite part of the project
+    What was your favorite part of the project?    seeing a finished product after all the hours invested
 
 
 
