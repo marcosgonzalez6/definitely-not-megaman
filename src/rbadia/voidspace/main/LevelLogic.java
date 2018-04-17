@@ -220,7 +220,7 @@ public class LevelLogic {
 			this.bigFont = originalFont;
 		}
 
-		String gameTitleStr = "MegaMAN !!!";
+		String gameTitleStr = "MegaMan";
 
 		Font currentFont = biggestFont == null? bigFont : biggestFont;
 		float fontSize = currentFont.getSize2D();
@@ -413,12 +413,7 @@ public class LevelLogic {
 			status.setLivesLeft(status.getLivesLeft() + 1);
 		}
 		
-		// check if necessary
-		if (ih.isNPressed()) {
-		}
-		
 		if (ih.isRPressed()) {
-			//TODO reset asteroid count
 			status.setAsteroidsDestroyed(0);
 			Level1State level = (Level1State) getLevelState();
 			level.setLevelAsteroidsDestroyed(0);

@@ -2,8 +2,6 @@ package rbadia.voidspace.model;
 
 import java.util.Random;
 
-//import rbadia.voidspace.main.speed;
-
 public class Asteroid extends GameObject {
 	private static final long serialVersionUID = 1L;
 	
@@ -16,10 +14,6 @@ public class Asteroid extends GameObject {
 		super(xPos, yPos, Asteroid.WIDTH, Asteroid.HEIGHT);
 		this.setSpeed(DEFAULT_SPEED);
 	}
-
-//	public int getDefaultSpeed(){
-//		return DEFAULT_SPEED;
-//	}
 	
 	public void setDefaultSpeed(int speed){
 		this.DEFAULT_SPEED = speed;

@@ -54,7 +54,6 @@ public class Level5State extends Level4State{
 	}
 	
 	public void drawBoss() {
-//		bossGravity();
 		Graphics2D g2d = getGraphics2D();
 		getGraphicsManager().drawBoss(boss, g2d, this);
 		moveBoss(this.getBoss());
@@ -117,9 +116,7 @@ public class Level5State extends Level4State{
 	}
 	
 	public boolean moveBossBullet(Bullet bullet){
-//		if(bullet.getY() - bullet.getSpeed() >= 0){
-		if(((bullet.getX() - bullet.getSpeed() >= 0) && (bullet.getX() + bullet.getSpeed() <= 500)) || (bossBullets.size() < 7)) {
-		// TODO check if 500 can be substituted for variable (SCREEN_WIDTH)
+		if(((bullet.getX() - bullet.getSpeed() >= 0) && (bullet.getX() + bullet.getSpeed() <= SCREEN_WIDTH)) || (bossBullets.size() < 7)) {
 			bullet.translate(-bullet.getSpeed(), 0);
 			return false;
 		}
@@ -163,7 +160,6 @@ public class Level5State extends Level4State{
 	}
 	
 	public void checkBulletBossCollisions() {
-//		GameStatus status = getGameStatus();
 		for(int i=0; i<bullets.size(); i++){
 			Bullet bullet = bullets.get(i);
 			if(boss.intersects(bullet)){

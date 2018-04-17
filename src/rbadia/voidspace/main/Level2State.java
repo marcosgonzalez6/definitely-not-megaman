@@ -1,6 +1,7 @@
 package rbadia.voidspace.main;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.util.Random;
 
 import rbadia.voidspace.graphics.GraphicsManager;
 import rbadia.voidspace.model.Platform;
@@ -40,8 +41,9 @@ public class Level2State extends Level1State {
 	@Override
 	protected void drawAsteroid() {
 		Graphics2D g2d = getGraphics2D();
+		Random rand = new Random();
 		if((asteroid.getX() + asteroid.getPixelsWide() > 0)) {
-			asteroid.translate(-asteroid.getSpeed(), asteroid.getSpeed()/2);
+			asteroid.translate((int) (rand.nextDouble() * -asteroid.getSpeed() * 2), (int) (rand.nextDouble() * asteroid.getSpeed()));
 			getGraphicsManager().drawAsteroid(asteroid, g2d, this);	
 		}
 		else {

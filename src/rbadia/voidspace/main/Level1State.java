@@ -108,7 +108,6 @@ public class Level1State extends LevelState {
 		// init game variables
 		bullets = new ArrayList<Bullet>();
 		bigBullets = new ArrayList<BigBullet>();
-		//numPlatforms = new Platform[5];
 
 		GameStatus status = this.getGameStatus();
 
@@ -232,12 +231,10 @@ public class Level1State extends LevelState {
 		drawAsteroid();
 		drawBullets();
 		drawBigBullets();
-		//drawPowerUp();
 		checkBullletAsteroidCollisions();
 		checkBigBulletAsteroidCollisions();
 		checkMegaManAsteroidCollisions();
 		checkAsteroidFloorCollisions();
-		//checkPowerUpMegaManCollisions();
 		
 		// update asteroids destroyed (score) label  
 		getMainFrame().getDestroyedValueLabel().setText(Long.toString(status.getAsteroidsDestroyed()));
@@ -549,9 +546,7 @@ public class Level1State extends LevelState {
 	 * @return if the bullet should be removed from screen
 	 */
 	public boolean moveBullet(Bullet bullet){
-//		if(bullet.getY() - bullet.getSpeed() >= 0){
-		if((bullet.getX() - bullet.getSpeed() >= 0) && (bullet.getX() + bullet.getSpeed() <= 500)) {
-		// TODO check if 500 can be substituted for variable (SCREEN_WIDTH)
+		if((bullet.getX() - bullet.getSpeed() >= 0) && (bullet.getX() + bullet.getSpeed() <= SCREEN_WIDTH)) {
 			if (!super.getIsMoveLeft())
 				bullet.translate(bullet.getSpeed(), 0);
 			else if (super.getIsMoveLeft())
@@ -568,9 +563,7 @@ public class Level1State extends LevelState {
 	 * @return if the bullet should be removed from screen
 	 */
 	public boolean moveBigBullet(BigBullet bigBullet){
-//		if(bigBullet.getY() - bigBullet.getSpeed() >= 0){
-		if((bigBullet.getX() - bigBullet.getSpeed() >= 0) && (bigBullet.getX() + bigBullet.getSpeed() <= 500)) {
-			// TODO check if 500 can be substituted for variable (SCREEN_WIDTH)
+		if((bigBullet.getX() - bigBullet.getSpeed() >= 0) && (bigBullet.getX() + bigBullet.getSpeed() <= SCREEN_WIDTH)) {
 			if (!super.getIsMoveLeft())
 				bigBullet.translate(bigBullet.getSpeed(), 0);
 			else if (super.getIsMoveLeft())
@@ -648,10 +641,6 @@ public class Level1State extends LevelState {
 			megaMan.translate(-megaMan.getSpeed(), 0);
 		}
 	}
-	
-//	public boolean isMegaMoveLeft(boolean moveLeft) {
-//		return moveLeft;
-//	}
 
 	/**
 	 * Move the megaMan right

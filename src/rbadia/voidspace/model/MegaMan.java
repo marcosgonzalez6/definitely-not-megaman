@@ -12,7 +12,6 @@ public class MegaMan extends GameObject {
 	
 	public static final int WIDTH = 42;
 	public static final int HEIGHT = 41;
-	//public static final int speed = DEFAULT_SPEED;
 	
 	public MegaMan(int xPos, int yPos){
 		super(xPos, yPos, WIDTH, HEIGHT);
@@ -30,6 +29,12 @@ public class MegaMan extends GameObject {
 	 */
 	public int getDefaultSpeed(){
 		return DEFAULT_SPEED;
+	}
+	
+	public void isOnPlatform(Platform platform) {
+		if (getY() + HEIGHT == platform.getY()) {
+			this.setLocation(this.x, (int) (getY() + HEIGHT - 1));
+		}
 	}
 	
 }

@@ -10,11 +10,6 @@ import rbadia.voidspace.model.Asteroid;
 import rbadia.voidspace.model.Platform;
 import rbadia.voidspace.sounds.SoundManager;
 
-/**
- * Level very similar to LevelState1.  
- * Platforms arranged in triangular form. 
- * Asteroids travel at 225 degree angle
- */
 public class Level3State extends Level1State {
 
 	private static final long serialVersionUID = -2094575762243216079L;
@@ -42,7 +37,7 @@ public class Level3State extends Level1State {
 	
 	@Override
 	public void doStart() {
-		this.numPlatforms = 4;
+		this.numPlatforms = 6;
 		lastAsteroid2Time = -NEW_ASTEROID_DELAY;
 		super.doStart();
 		newAsteroid2(this);
@@ -105,6 +100,14 @@ public class Level3State extends Level1State {
 				platformsArray[i].translate(0, platformsArray[i].getDefaultSpeed());
 			}
 		}
+	}
+	
+	@Override
+	protected void drawMegaMan() {
+		for(int i=0; i<getNumPlatforms(); i++){
+			megaMan.isOnPlatform(platforms[i]);
+		}
+		super.drawMegaMan();
 	}
 	
 	/**
